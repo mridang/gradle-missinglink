@@ -135,7 +135,7 @@ dependencies {
 	jacocoAgent group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.12'
 	jacocoAnt group: 'org.jacoco', name: 'org.jacoco.ant', version: '0.8.12'
     implementation gradleApi()
-    implementation group: 'com.google.code.findbugs', name: 'annotations', version: '3.0.1'
+    implementation group: 'com.google.code.findbugs', name: 'annotations', version: '3.0.1u2'
     implementation group: 'com.spotify', name: 'missinglink-core', version: '0.2.11'
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.3")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.3")
