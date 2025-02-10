@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.junit.jupiter.api.io.TempDir;
 
+@SuppressWarnings("checkstyle:LineLength")
 class MissingLinkPluginFunctionalTest {
 
   /**

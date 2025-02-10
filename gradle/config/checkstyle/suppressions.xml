@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions [
+	<!ELEMENT suppressions (suppress*)>
+
+	<!ELEMENT suppress EMPTY>
+	<!ATTLIST suppress files CDATA #IMPLIED
+		checks CDATA #IMPLIED
+		message CDATA #IMPLIED
+		id CDATA #IMPLIED
+		lines CDATA #IMPLIED
+		columns CDATA #IMPLIED>
+	]>
+
+<suppressions>
+
+</suppressions>

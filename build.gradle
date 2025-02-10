@@ -1,6 +1,8 @@
 plugins {
     id 'java-gradle-plugin'
     id "jacoco"
+	id "pmd"
+	id "checkstyle"
     id 'maven-publish'
     id 'com.diffplug.spotless' version '7.0.2'
     id "net.ltgt.errorprone" version "4.1.0"
@@ -19,6 +21,50 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+}
+
+// Configuration for the Spotbugs plugin. It seems that it isn't possible to define
+// the output report formats here and those seem to be defined on the individual
+// task level.
+spotbugs {
+	effort = com.github.spotbugs.snom.Effort.MAX
+	showProgress = true
+}
+
+tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach { task ->
+	task.reports {
+		sarif {
+			required = true
+		}
+		xml {
+			required = true
+		}
+		html {
+			required = true
+		}
+	}
+}
+
+// Configuration for the Checkstyle plugin. It seems that it isn't possible to define
+// the output report formats here and those seem to be defined on the individual
+// task level.
+checkstyle {
+	config rootProject.resources.text.fromFile("gradle/config/checkstyle/google_checks.xml")
+}
+
+tasks.withType(Checkstyle).configureEach { task ->
+	task.enabled = true
+	task.reports {
+		sarif {
+			required = true
+		}
+		xml {
+			required = true
+		}
+		html {
+			required = true
+		}
+	}
 }
 
 //// Configuration for the nullaway extension. The rest of the parameters must be
@@ -81,6 +127,7 @@ spotless {
 }
 
 dependencies {
+	checkstyle group: 'com.puppycrawl.tools', name: 'checkstyle', version: '10.21.0'
     errorprone group: 'com.uber.nullaway', name: 'nullaway', version: '0.12.2'
 	errorprone group: 'com.google.errorprone', name: 'error_prone_core', version: '2.36.0'
 	spotbugsPlugins group: 'com.h3xstream.findsecbugs', name: 'findsecbugs-plugin', version: '1.13.0'
