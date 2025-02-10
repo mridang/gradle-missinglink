@@ -9,6 +9,12 @@ import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.ListProperty;
 import org.gradle.api.provider.Property;
 
+/**
+ * Configuration extension for the MissingLink Gradle plugin.
+ *
+ * <p>This extension allows users to configure how MissingLink operates, including skipping checks,
+ * handling conflicts, and configuring reports.
+ */
 public abstract class MissingLinkExtension {
 
   private final Property<Boolean> skip;
@@ -17,6 +23,12 @@ public abstract class MissingLinkExtension {
   private final ListProperty<String> excludeDependencies;
   private final MissingLinkReports reports;
 
+  /**
+   * Constructs the MissingLink extension, initializing its properties.
+   *
+   * @param project The Gradle project this extension is associated with.
+   * @param objectFactory The Gradle {@link ObjectFactory} for creating properties.
+   */
   @SuppressWarnings("InjectOnConstructorOfAbstractClass")
   @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   @Inject
@@ -30,24 +42,49 @@ public abstract class MissingLinkExtension {
     this.reports = objectFactory.newInstance(MissingLinkReportsImpl.class, project, objectFactory);
   }
 
+  /**
+   * Determines whether the MissingLink check should be skipped.
+   *
+   * @return A {@link Property} indicating whether to skip the check.
+   */
   @SuppressFBWarnings("EI_EXPOSE_REP")
   public Property<Boolean> getSkip() {
     return skip;
   }
 
+  /**
+   * Determines whether the build should fail if conflicts are detected.
+   *
+   * @return A {@link Property} indicating whether to fail on conflicts.
+   */
   @SuppressFBWarnings("EI_EXPOSE_REP")
   public Property<Boolean> getFailOnConflicts() {
     return failOnConflicts;
   }
 
+  /**
+   * Gets the list of categories to include in the MissingLink check.
+   *
+   * @return A {@link ListProperty} containing the included categories.
+   */
   public ListProperty<String> getIncludeCategories() {
     return includeCategories;
   }
 
+  /**
+   * Gets the list of dependencies to exclude from the MissingLink check.
+   *
+   * @return A {@link ListProperty} containing the excluded dependencies.
+   */
   public ListProperty<String> getExcludeDependencies() {
     return excludeDependencies;
   }
 
+  /**
+   * Adds a dependency to the exclusion list.
+   *
+   * @param dependency The dependency to exclude (format: "group:name").
+   */
   public void excludeDependency(String dependency) {
     this.excludeDependencies.add(dependency);
   }
@@ -55,7 +92,7 @@ public abstract class MissingLinkExtension {
   /**
    * Returns the reports configuration for the MissingLink plugin.
    *
-   * @return The reports configuration.
+   * @return The {@link MissingLinkReports} instance containing report settings.
    */
   public MissingLinkReports getReports() {
     return reports;
