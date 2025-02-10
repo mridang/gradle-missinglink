@@ -113,7 +113,3 @@ publishing {
         }
     }
 }
-
-test {
-    useJUnitPlatform()
-}
