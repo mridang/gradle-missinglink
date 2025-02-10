@@ -26,8 +26,6 @@ public class MissingLinkPlugin implements Plugin<Project> {
                   task.setGroup("verification");
                   task.setDescription("Checks for missing link conflicts in dependencies.");
                   task.getFailOnConflicts().set(extension.getFailOnConflicts());
-                  task.getIgnoreSourcePackages().set(extension.getIgnoreSourcePackages());
-                  task.getIgnoreDestinationPackages().set(extension.getIgnoreDestinationPackages());
                   task.getReports()
                       .getHtml()
                       .getRequired()
