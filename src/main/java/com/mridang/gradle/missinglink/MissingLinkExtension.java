@@ -1,5 +1,6 @@
 package com.mridang.gradle.missinglink;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
@@ -22,6 +23,8 @@ public abstract class MissingLinkExtension {
   private final ListProperty<String> targetDestinationPackages;
   private final MissingLinkReports reports;
 
+  @SuppressWarnings("InjectOnConstructorOfAbstractClass")
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   @Inject
   public MissingLinkExtension(Project project, ObjectFactory objectFactory) {
     this.skip = objectFactory.property(Boolean.class).convention(false);
@@ -43,10 +46,12 @@ public abstract class MissingLinkExtension {
     this.reports = objectFactory.newInstance(MissingLinkReportsImpl.class, project, objectFactory);
   }
 
+  @SuppressFBWarnings("EI_EXPOSE_REP")
   public Property<Boolean> getSkip() {
     return skip;
   }
 
+  @SuppressFBWarnings("EI_EXPOSE_REP")
   public Property<Boolean> getFailOnConflicts() {
     return failOnConflicts;
   }

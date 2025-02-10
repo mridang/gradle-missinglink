@@ -2,6 +2,7 @@ package com.mridang.gradle.missinglink.artifacts;
 
 import com.spotify.missinglink.Java9ModuleLoader;
 import com.spotify.missinglink.datamodel.Artifact;
+import java.util.Collections;
 import java.util.List;
 import org.gradle.api.logging.Logger;
 import org.gradle.api.logging.Logging;
@@ -31,12 +32,21 @@ public record BootstrapArtifacts(List<Artifact> artifacts) {
             .toList());
   }
 
+  public BootstrapArtifacts(List<Artifact> artifacts) {
+    this.artifacts = List.copyOf(artifacts);
+  }
+
+  @Override
+  public List<Artifact> artifacts() {
+    return Collections.unmodifiableList(artifacts);
+  }
+
   /**
    * Converts Java 9 module artifacts into Spotify MissingLink Artifacts.
    *
    * @return A list of artifacts compatible with the MissingLink library.
    */
   public List<Artifact> toMissingLinkArtifacts() {
-    return artifacts;
+    return artifacts();
   }
 }

@@ -24,6 +24,10 @@ public record MissingLinkExclusions(List<String> excludePatterns) {
             .get());
   }
 
+  public MissingLinkExclusions(List<String> excludePatterns) {
+    this.excludePatterns = List.copyOf(excludePatterns);
+  }
+
   /**
    * Checks if a given artifact is excluded based on its group, name, or version.
    *

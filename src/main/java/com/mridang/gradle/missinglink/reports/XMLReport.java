@@ -55,7 +55,10 @@ public class XMLReport {
 
   @JsonRootName("report")
   public static record ReportWrapper(@JsonProperty("conflicts") List<ConflictRecord> conflicts) {
-    //
+
+    public ReportWrapper(List<ConflictRecord> conflicts) {
+      this.conflicts = List.copyOf(conflicts);
+    }
   }
 
   /**

@@ -40,12 +40,19 @@ public class SARIFReport {
   /** SARIF Root structure. */
   protected static record SarifRoot(
       @JsonProperty("sarif") String version, @JsonProperty("runs") List<SarifRun> runs) {
-    //
+
+    public SarifRoot(String version, @JsonProperty("runs") List<SarifRun> runs) {
+      this.version = version;
+      this.runs = List.copyOf(runs);
+    }
   }
 
   /** SARIF Run structure. */
   protected static record SarifRun(@JsonProperty("results") List<SarifResult> results) {
-    //
+
+    public SarifRun(List<SarifResult> results) {
+      this.results = List.copyOf(results);
+    }
   }
 
   /** SARIF Result structure. */

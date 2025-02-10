@@ -5,6 +5,7 @@ import com.mridang.gradle.missinglink.MissingLinkExclusions;
 import com.spotify.missinglink.ArtifactLoader;
 import com.spotify.missinglink.datamodel.Artifact;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import org.gradle.api.Project;
 import org.gradle.api.logging.Logger;
@@ -36,6 +37,15 @@ public record ClasspathArtifacts(List<MissingLinkArtifact> artifacts) {
             .map(MissingLinkArtifact::fromResolvedArtifact)
             .peek(artifact -> LOGGER.debug("Resolved artifact: {}", artifact))
             .toList());
+  }
+
+  public ClasspathArtifacts(List<MissingLinkArtifact> artifacts) {
+    this.artifacts = List.copyOf(artifacts);
+  }
+
+  @Override
+  public List<MissingLinkArtifact> artifacts() {
+    return Collections.unmodifiableList(artifacts);
   }
 
   /**

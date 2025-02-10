@@ -8,6 +8,7 @@ import com.mridang.gradle.missinglink.reports.XMLReport;
 import com.spotify.missinglink.ArtifactLoader;
 import com.spotify.missinglink.Conflict;
 import com.spotify.missinglink.ConflictChecker;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import groovy.lang.Closure;
 import java.io.IOException;
 import java.util.List;
@@ -47,6 +48,8 @@ public abstract class MissingLinkTask extends DefaultTask implements Reporting<M
 
   private final MissingLinkReports reports;
 
+  @SuppressWarnings("InjectOnConstructorOfAbstractClass")
+  @SuppressFBWarnings("CT_CONSTRUCTOR_THROW")
   @Inject
   public MissingLinkTask(Project project, ObjectFactory objectFactory) {
     reports = objectFactory.newInstance(MissingLinkReportsImpl.class, project, objectFactory);
@@ -67,7 +70,9 @@ public abstract class MissingLinkTask extends DefaultTask implements Reporting<M
 
   @Override
   public MissingLinkReports reports(Closure configureClosure) {
-    return (MissingLinkReports) ConfigureUtil.configure(configureClosure, reports);
+    Action<? super MissingLinkReports> action = ConfigureUtil.configureUsing(configureClosure);
+    action.execute(reports);
+    return reports;
   }
 
   @TaskAction
