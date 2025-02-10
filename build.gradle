@@ -1,0 +1,64 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'com.diffplug.spotless' version '7.0.2'
+}
+
+group = 'com.mridang.gradle'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+spotless {
+    java {
+        target '**/*.java'
+        googleJavaFormat('1.17.0')
+    }
+}
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed"
+    }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation group: 'com.spotify', name: 'missinglink-core', version: '0.2.11'
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.15.3")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.3")
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.9.2'
+}
+
+gradlePlugin {
+    plugins {
+        missingLink {
+            id = 'com.mridang.gradle.missinglink'
+            implementationClass = 'com.mridang.gradle.missinglink.MissingLinkPlugin'
+            displayName = 'Gradle MissingLink Plugin'
+            description = 'A Gradle plugin that checks for dependency conflicts using Spotify MissingLink'
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
