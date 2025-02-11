@@ -56,7 +56,7 @@ public record ClasspathArtifacts(List<MissingLinkArtifact> artifacts) {
    */
   public ClasspathArtifacts filter(MissingLinkExclusions exclusions) {
     return new ClasspathArtifacts(
-        artifacts.stream().filter(artifact -> !exclusions.isExcluded(artifact)).toList());
+        artifacts.stream().filter(artifact -> !exclusions.test(artifact)).toList());
   }
 
   /**

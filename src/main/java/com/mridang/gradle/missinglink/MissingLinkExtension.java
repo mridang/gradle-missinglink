@@ -34,7 +34,7 @@ public abstract class MissingLinkExtension {
   @Inject
   public MissingLinkExtension(Project project, ObjectFactory objectFactory) {
     this.skip = objectFactory.property(Boolean.class).convention(false);
-    this.failOnConflicts = objectFactory.property(Boolean.class).convention(false);
+    this.failOnConflicts = objectFactory.property(Boolean.class).convention(true);
     this.includeCategories =
         objectFactory.listProperty(String.class).convention(Collections.emptyList());
     this.excludeDependencies =

@@ -1,14 +1,16 @@
 package com.mridang.gradle.missinglink;
 
 import java.util.List;
+import java.util.function.Predicate;
 import org.gradle.api.Project;
 
 /**
- * Represents a set of excluded artifacts, allowing users to exclude dependencies by full name
+ * Represents a set of excluded artifacts, allowing users to exclude dependencies by full name.
  *
  * @param excludePatterns A list of exclusion patterns from the Gradle extension.
  */
-public record MissingLinkExclusions(List<String> excludePatterns) {
+public record MissingLinkExclusions(List<String> excludePatterns)
+    implements Predicate<MissingLinkArtifact> {
 
   /**
    * Constructs exclusions from the project configuration.
@@ -34,7 +36,8 @@ public record MissingLinkExclusions(List<String> excludePatterns) {
    * @param artifact The artifact metadata.
    * @return {@code true} if the artifact matches an exclusion pattern, otherwise {@code false}.
    */
-  public boolean isExcluded(MissingLinkArtifact artifact) {
+  @Override
+  public boolean test(MissingLinkArtifact artifact) {
     return excludePatterns.stream()
         .anyMatch(
             exclusion -> exclusion.equals("%s:%s".formatted(artifact.group(), artifact.name())));

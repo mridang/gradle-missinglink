@@ -8,7 +8,6 @@ import org.gradle.api.file.RegularFile;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.reporting.CustomizableHtmlReport;
-import org.gradle.api.reporting.ReportingExtension;
 import org.gradle.api.reporting.SingleFileReport;
 import org.gradle.api.reporting.internal.CustomizableHtmlReportImpl;
 import org.gradle.api.reporting.internal.DefaultReportContainer;
@@ -33,9 +32,8 @@ public class MissingLinkReportsImpl extends DelegatingReportContainer<SingleFile
                   factory.instantiateReport(DefaultSingleFileReport.class, "sarif", project);
 
               // Get reports directory as Provider<Directory>
-              ReportingExtension reporting =
-                  project.getExtensions().getByType(ReportingExtension.class);
-              Provider<Directory> reportsDir = reporting.getBaseDirectory().dir("missinglink");
+              Provider<Directory> reportsDir =
+                  project.getLayout().getBuildDirectory().dir("reports/missinglink");
 
               // Explicitly convert Provider<Directory> to Provider<RegularFile>
               Provider<RegularFile> htmlFile = reportsDir.map(dir -> dir.file("missinglink.html"));

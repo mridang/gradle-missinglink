@@ -11,6 +11,7 @@ public class MissingLinkPlugin implements Plugin<Project> {
 
   @Override
   public void apply(Project project) {
+    project.getPluginManager().apply("java");
     MissingLinkExtension extension =
         project
             .getExtensions()
@@ -54,15 +55,20 @@ public class MissingLinkPlugin implements Plugin<Project> {
                       .from(project.getConfigurations().getByName("runtimeClasspath"));
                 });
 
+    project.afterEvaluate(
+        p -> {
+          project
+              .getTasks()
+              .named("check")
+              .configure(checkTask -> checkTask.dependsOn(missingLinkTask));
+        });
+
     project
-        .getPlugins()
-        .withId(
-            "java",
-            plugin -> {
-              project
-                  .getTasks()
-                  .named("check")
-                  .configure(checkTask -> checkTask.dependsOn(missingLinkTask));
+        .getTasks()
+        .named("check")
+        .configure(
+            checkTask -> {
+              checkTask.dependsOn(missingLinkTask);
             });
   }
 }

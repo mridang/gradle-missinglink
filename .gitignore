@@ -26,3 +26,5 @@ replay_pid*
 .gradle
 
 .vscode
+
+build
