@@ -66,6 +66,6 @@ class SARIFReportTest {
     report.writeToFile(outputFile);
 
     SarifRoot sarifRoot = JSON_READER.readValue(outputFile);
-    assertEquals(sarifRoot, report.getSarifRoot());
+    assertEquals(sarifRoot, report.sarifRoot);
   }
 }

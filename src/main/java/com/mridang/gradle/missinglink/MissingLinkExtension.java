@@ -47,6 +47,7 @@ public abstract class MissingLinkExtension {
    *
    * @return A {@link Property} indicating whether to skip the check.
    */
+  @SuppressWarnings("unused")
   @SuppressFBWarnings("EI_EXPOSE_REP")
   public Property<Boolean> getSkip() {
     return skip;
@@ -67,6 +68,7 @@ public abstract class MissingLinkExtension {
    *
    * @return A {@link ListProperty} containing the included categories.
    */
+  @SuppressWarnings("unused")
   public ListProperty<String> getIncludeCategories() {
     return includeCategories;
   }
@@ -85,6 +87,7 @@ public abstract class MissingLinkExtension {
    *
    * @param dependency The dependency to exclude (format: "group:name").
    */
+  @SuppressWarnings("unused")
   public void excludeDependency(String dependency) {
     this.excludeDependencies.add(dependency);
   }
@@ -103,6 +106,7 @@ public abstract class MissingLinkExtension {
    *
    * @param configureAction The action to configure the reports.
    */
+  @SuppressWarnings("unused")
   public void reports(Action<? super MissingLinkReports> configureAction) {
     configureAction.execute(reports);
   }

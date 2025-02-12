@@ -16,7 +16,7 @@ public class SARIFReport {
           .setSerializationInclusion(JsonInclude.Include.NON_NULL)
           .writerWithDefaultPrettyPrinter();
   private static final String SARIF_VERSION = "2.1.0";
-  private final SarifRoot sarifRoot;
+  protected final SarifRoot sarifRoot;
 
   public SARIFReport(List<Conflict> conflicts) {
     List<SarifResult> results =
@@ -33,12 +33,8 @@ public class SARIFReport {
     }
   }
 
-  public SarifRoot getSarifRoot() {
-    return sarifRoot;
-  }
-
   /** SARIF Root structure. */
-  protected static record SarifRoot(
+  protected record SarifRoot(
       @JsonProperty("sarif") String version, @JsonProperty("runs") List<SarifRun> runs) {
 
     public SarifRoot(String version, @JsonProperty("runs") List<SarifRun> runs) {
@@ -48,7 +44,7 @@ public class SARIFReport {
   }
 
   /** SARIF Run structure. */
-  protected static record SarifRun(@JsonProperty("results") List<SarifResult> results) {
+  protected record SarifRun(@JsonProperty("results") List<SarifResult> results) {
 
     public SarifRun(List<SarifResult> results) {
       this.results = List.copyOf(results);
@@ -56,7 +52,7 @@ public class SARIFReport {
   }
 
   /** SARIF Result structure. */
-  protected static record SarifResult(@JsonProperty("message") String message) {
+  protected record SarifResult(@JsonProperty("message") String message) {
     //
   }
 }

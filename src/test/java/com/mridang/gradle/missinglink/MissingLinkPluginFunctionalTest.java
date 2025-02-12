@@ -66,7 +66,7 @@ class MissingLinkPluginFunctionalTest {
   @Test
   void testMissingLinkTaskRunsWhenThereAreNoErrors(@TempDir Path testProjectDir, TestInfo testInfo)
       throws IOException {
-    Boolean result =
+    boolean result =
         runGradleAndCheckTaskSuccess(
             testProjectDir,
             testInfo,
@@ -108,7 +108,7 @@ class MissingLinkPluginFunctionalTest {
   @Test
   void testMissingLinkTaskRunsSuccessfully(@TempDir Path testProjectDir, TestInfo testInfo)
       throws IOException {
-    Boolean result =
+    boolean result =
         runGradleAndCheckTaskSuccess(
             testProjectDir,
             testInfo,
@@ -151,7 +151,7 @@ class MissingLinkPluginFunctionalTest {
   @Test
   void testMissingLinkTaskWithExcludedDependencies(@TempDir Path testProjectDir, TestInfo testInfo)
       throws IOException {
-    Boolean result =
+    boolean result =
         runGradleAndCheckTaskSuccess(
             testProjectDir,
             testInfo,
@@ -210,7 +210,7 @@ class MissingLinkPluginFunctionalTest {
   @Test
   void testThatReportLocationCanBeChanged(@TempDir Path testProjectDir, TestInfo testInfo)
       throws IOException {
-    Boolean result =
+    boolean result =
         runGradleAndCheckTaskSuccess(
             testProjectDir,
             testInfo,
@@ -271,7 +271,7 @@ class MissingLinkPluginFunctionalTest {
   @Test
   void testMissingLinkTaskWithExcludedDependencieReportsOfds(
       @TempDir Path testProjectDir, TestInfo testInfo) throws IOException {
-    Boolean result =
+    boolean result =
         runGradleAndCheckTaskSuccess(
             testProjectDir,
             testInfo,

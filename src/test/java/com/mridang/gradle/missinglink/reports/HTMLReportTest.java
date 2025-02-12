@@ -10,7 +10,6 @@ import com.spotify.missinglink.datamodel.MethodDependencyBuilder;
 import com.spotify.missinglink.datamodel.MethodDescriptorBuilder;
 import com.spotify.missinglink.datamodel.TypeDescriptors;
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -47,7 +46,7 @@ class HTMLReportTest {
   }
 
   @Test
-  void testWriteToFile(@TempDir File tempDir) throws IOException {
+  void testWriteToFile(@TempDir File tempDir) {
     List<Conflict> conflicts =
         List.of(
             createConflict(

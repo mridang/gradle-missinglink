@@ -68,8 +68,7 @@ public class HTMLReport {
                       <th>Exists In</th>
                       <th>Used By</th>
                   </tr>
-              </thead>
-              """
+              </thead>"""
               + XML_MAPPER.writeValueAsString(tableBody).replaceAll("td.*?td", "td")
               + """
           </table>
@@ -82,7 +81,7 @@ public class HTMLReport {
 
   /** Represents the body of the HTML table (generated dynamically). */
   @JacksonXmlRootElement(localName = "tbody")
-  protected static record TableBody(
+  protected record TableBody(
       @JacksonXmlElementWrapper(useWrapping = false) @JsonProperty("tr") List<TableRow> rows) {
 
     public TableBody(List<TableRow> rows) {
@@ -91,7 +90,7 @@ public class HTMLReport {
   }
 
   /** Represents a row in the HTML table. */
-  protected static record TableRow(
+  protected record TableRow(
       @JsonProperty("tdcategorytd") String category,
       @JsonProperty("tdreasontd") String reason,
       @JsonProperty("tddependencytd") String dependency,

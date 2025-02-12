@@ -54,9 +54,10 @@ public class XMLReport {
   }
 
   @JsonRootName("report")
-  public static record ReportWrapper(@JsonProperty("conflicts") List<ConflictRecord> conflicts) {
+  public record ReportWrapper(@JsonProperty("conflicts") List<ConflictRecord> conflicts) {
 
-    public ReportWrapper(List<ConflictRecord> conflicts) {
+    public ReportWrapper(
+        @SuppressWarnings("ClassEscapesDefinedScope") List<ConflictRecord> conflicts) {
       this.conflicts = List.copyOf(conflicts);
     }
   }
@@ -70,7 +71,7 @@ public class XMLReport {
    * @param existsIn The artifact where the conflict exists.
    * @param usedBy The artifact using the conflicting dependency.
    */
-  protected static record ConflictRecord(
+  protected record ConflictRecord(
       @JsonProperty("reason") String reason,
       @JsonProperty("category") Conflict.ConflictCategory category,
       @JsonProperty("dependency") DependencyRecord dependency,
@@ -88,7 +89,7 @@ public class XMLReport {
    * @param targetClass The class that is being depended on.
    * @param description A human-readable description of the dependency.
    */
-  private static record DependencyRecord(
+  private record DependencyRecord(
       @JsonProperty("fromClass") String fromClass,
       @JsonProperty("fromMethod") String fromMethod,
       @JsonProperty("fromLine") int fromLine,

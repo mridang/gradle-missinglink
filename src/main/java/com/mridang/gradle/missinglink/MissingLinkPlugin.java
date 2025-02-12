@@ -56,19 +56,12 @@ public class MissingLinkPlugin implements Plugin<Project> {
                 });
 
     project.afterEvaluate(
-        p -> {
-          project
-              .getTasks()
-              .named("check")
-              .configure(checkTask -> checkTask.dependsOn(missingLinkTask));
-        });
+        p ->
+            project
+                .getTasks()
+                .named("check")
+                .configure(checkTask -> checkTask.dependsOn(missingLinkTask)));
 
-    project
-        .getTasks()
-        .named("check")
-        .configure(
-            checkTask -> {
-              checkTask.dependsOn(missingLinkTask);
-            });
+    project.getTasks().named("check").configure(checkTask -> checkTask.dependsOn(missingLinkTask));
   }
 }

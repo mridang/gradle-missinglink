@@ -1,3 +1,6 @@
+import com.github.spotbugs.snom.Effort
+import com.github.spotbugs.snom.SpotBugsTask
+
 plugins {
     id "jacoco"
 	id "pmd"
@@ -29,11 +32,11 @@ javadoc.options.addStringOption('Xdoclint:none')
 // the output report formats here and those seem to be defined on the individual
 // task level.
 spotbugs {
-	effort = com.github.spotbugs.snom.Effort.MAX
+	effort = Effort.MAX
 	showProgress = true
 }
 
-tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach { task ->
+tasks.withType(SpotBugsTask).configureEach { task ->
 	task.reports {
 		sarif {
 			required = true

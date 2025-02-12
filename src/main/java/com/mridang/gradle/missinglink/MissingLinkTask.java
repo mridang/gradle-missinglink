@@ -30,6 +30,7 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.Nested;
 import org.gradle.api.tasks.TaskAction;
 import org.gradle.util.ConfigureUtil;
+import org.jetbrains.annotations.NotNull;
 
 @CacheableTask
 public abstract class MissingLinkTask extends DefaultTask implements Reporting<MissingLinkReports> {
@@ -58,18 +59,19 @@ public abstract class MissingLinkTask extends DefaultTask implements Reporting<M
 
   @Override
   @Nested
-  public MissingLinkReports getReports() {
+  public @NotNull MissingLinkReports getReports() {
     return reports;
   }
 
   @Override
-  public MissingLinkReports reports(Action<? super MissingLinkReports> configureAction) {
+  public @NotNull MissingLinkReports reports(Action<? super MissingLinkReports> configureAction) {
     configureAction.execute(reports);
     return reports;
   }
 
+  @SuppressWarnings("deprecation")
   @Override
-  public MissingLinkReports reports(Closure configureClosure) {
+  public @NotNull MissingLinkReports reports(@NotNull Closure configureClosure) {
     Action<? super MissingLinkReports> action = ConfigureUtil.configureUsing(configureClosure);
     action.execute(reports);
     return reports;
@@ -104,7 +106,7 @@ public abstract class MissingLinkTask extends DefaultTask implements Reporting<M
     conflicts = filterConflicts(conflicts);
 
     if (!conflicts.isEmpty()) {
-      getLogger().error(conflicts.size() + " conflicts found!");
+      getLogger().error("{} conflicts found!", conflicts.size());
 
       if (reports.getHtml().getRequired().get()) {
         System.out.println("Html enabled");

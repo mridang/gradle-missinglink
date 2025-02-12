@@ -19,15 +19,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MissingLinkPluginTest {
 
-  private final Project project;
-
-  /** Creates a new test project and applies the necessary plugins. */
-  MissingLinkPluginTest() {
-    this.project = ProjectBuilder.builder().build();
-    project.getPlugins().apply(JavaPlugin.class);
-    project.getPlugins().apply(MissingLinkPlugin.class);
-  }
-
   /** Provides a preconfigured Project instance for tests. */
   private static Stream<Project> projectProvider() {
     Project project = ProjectBuilder.builder().build();
@@ -48,6 +39,7 @@ class MissingLinkPluginTest {
   @MethodSource("projectProvider")
   void testPluginRegistersTask(Project project) {
     Task missingLinkTask = project.getTasks().findByName(MissingLinkPlugin.TASK_NAME);
+    assertNotNull(missingLinkTask);
     assertEquals("verification", missingLinkTask.getGroup());
     assertEquals(
         "Checks for missing link conflicts in dependencies.", missingLinkTask.getDescription());
@@ -78,6 +70,7 @@ class MissingLinkPluginTest {
     MissingLinkExtension extension =
         (MissingLinkExtension) project.getExtensions().findByName(MissingLinkPlugin.EXTENSION_NAME);
 
+    assertNotNull(extension);
     assertTrue(extension.getFailOnConflicts().get(), "failOnConflicts should default to true");
   }
 
@@ -88,6 +81,7 @@ class MissingLinkPluginTest {
     MissingLinkExtension extension =
         (MissingLinkExtension) project.getExtensions().findByName(MissingLinkPlugin.EXTENSION_NAME);
 
+    assertNotNull(extension);
     assertTrue(
         extension.getReports().getHtml().getRequired().get(),
         "HTML report should be enabled by default");
@@ -100,6 +94,7 @@ class MissingLinkPluginTest {
     MissingLinkExtension extension =
         (MissingLinkExtension) project.getExtensions().findByName(MissingLinkPlugin.EXTENSION_NAME);
 
+    assertNotNull(extension);
     assertTrue(
         extension.getReports().getXml().getRequired().get(),
         "XML report should be disabled by default");
@@ -112,6 +107,7 @@ class MissingLinkPluginTest {
     MissingLinkExtension extension =
         (MissingLinkExtension) project.getExtensions().findByName(MissingLinkPlugin.EXTENSION_NAME);
 
+    assertNotNull(extension);
     assertTrue(
         extension.getReports().getSarif().getRequired().get(),
         "SARIF report should be disabled by default");

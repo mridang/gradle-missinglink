@@ -7,6 +7,7 @@ import org.gradle.api.artifacts.ModuleIdentifier;
 import org.gradle.api.artifacts.ResolvedArtifact;
 import org.gradle.api.artifacts.ResolvedModuleVersion;
 import org.gradle.api.artifacts.component.ComponentArtifactIdentifier;
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 /** Unit tests for the {@link MissingLinkArtifact} record. */
@@ -31,36 +32,27 @@ class MissingLinkArtifactTest {
   }
 
   /** Simple implementation of {@link ResolvedArtifact} for testing purposes. */
-  private static class TestResolvedArtifact implements ResolvedArtifact {
-    private final String group;
-    private final String name;
-    private final String version;
-    private final File file;
-
-    TestResolvedArtifact(String group, String name, String version, File file) {
-      this.group = group;
-      this.name = name;
-      this.version = version;
-      this.file = file;
-    }
+  @SuppressWarnings("SameParameterValue")
+  private record TestResolvedArtifact(String group, String name, String version, File file)
+      implements ResolvedArtifact {
 
     @Override
-    public File getFile() {
+    public @NotNull File getFile() {
       return file;
     }
 
     @Override
-    public ResolvedModuleVersion getModuleVersion() {
+    public @NotNull ResolvedModuleVersion getModuleVersion() {
       return new TestResolvedModuleVersion(group, version);
     }
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
       return name;
     }
 
     @Override
-    public String getType() {
+    public @NotNull String getType() {
       return "jar";
     }
 
@@ -76,41 +68,35 @@ class MissingLinkArtifactTest {
     }
 
     @Override
-    public ComponentArtifactIdentifier getId() {
+    public @NotNull ComponentArtifactIdentifier getId() {
       throw new UnsupportedOperationException("Not implemented");
     }
   }
 
   /** Simple implementation of {@link ResolvedModuleVersion} for testing. */
-  private static class TestResolvedModuleVersion implements ResolvedModuleVersion {
-    private final String group;
-    private final String version;
-
-    TestResolvedModuleVersion(String group, String version) {
-      this.group = group;
-      this.version = version;
-    }
+  private record TestResolvedModuleVersion(String group, String version)
+      implements ResolvedModuleVersion {
 
     @Override
-    public org.gradle.api.artifacts.ModuleVersionIdentifier getId() {
+    public org.gradle.api.artifacts.@NotNull ModuleVersionIdentifier getId() {
       return new org.gradle.api.artifacts.ModuleVersionIdentifier() {
         @Override
-        public String getGroup() {
+        public @NotNull String getGroup() {
           return group;
         }
 
         @Override
-        public String getName() {
+        public @NotNull String getName() {
           return "test-module";
         }
 
         @Override
-        public String getVersion() {
+        public @NotNull String getVersion() {
           return version;
         }
 
         @Override
-        public ModuleIdentifier getModule() {
+        public @NotNull ModuleIdentifier getModule() {
           throw new UnsupportedOperationException("Not supported yet.");
         }
       };

@@ -43,6 +43,7 @@ public record ClasspathArtifacts(List<MissingLinkArtifact> artifacts) {
     this.artifacts = List.copyOf(artifacts);
   }
 
+  @SuppressWarnings("unused")
   @Override
   public List<MissingLinkArtifact> artifacts() {
     return Collections.unmodifiableList(artifacts);
