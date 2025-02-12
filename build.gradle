@@ -11,7 +11,7 @@ plugins {
 }
 
 group = 'com.mridang.gradle'
-version = '0.0.1'
+version = project.findProperty("version") ?: "0.0.0"
 
 repositories {
     mavenCentral()
