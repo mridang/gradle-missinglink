@@ -1,9 +1,9 @@
 plugins {
-    id 'java-gradle-plugin'
     id "jacoco"
 	id "pmd"
 	id "checkstyle"
     id 'maven-publish'
+	id 'com.gradle.plugin-publish' version '1.2.1'
     id 'com.diffplug.spotless' version '7.0.2'
     id "net.ltgt.errorprone" version "4.1.0"
 	id "net.ltgt.nullaway" version "2.2.0"
@@ -143,12 +143,19 @@ dependencies {
 }
 
 gradlePlugin {
+	website = "https://github.com/mridang/gradle-missinglink"
+	vcsUrl = "https://github.com/mridang/gradle-missinglink"
     plugins {
         missingLink {
             id = 'com.mridang.gradle.missinglink'
             implementationClass = 'com.mridang.gradle.missinglink.MissingLinkPlugin'
             displayName = 'Gradle MissingLink Plugin'
             description = 'A Gradle plugin that checks for dependency conflicts using Spotify MissingLink'
+			tags.set([
+				'dependencies',
+				'classpath',
+				'verfication',
+			])
         }
     }
 }
