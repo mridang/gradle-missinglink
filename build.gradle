@@ -23,6 +23,8 @@ java {
     }
 }
 
+javadoc.options.addStringOption('Xdoclint:none')
+
 // Configuration for the Spotbugs plugin. It seems that it isn't possible to define
 // the output report formats here and those seem to be defined on the individual
 // task level.
@@ -50,10 +52,6 @@ tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach { task ->
 // task level.
 checkstyle {
 	config = rootProject.resources.text.fromFile("gradle/config/checkstyle/google_checks.xml")
-	    configProperties = [
-        "checkstyle.javadoc.method.scope": "private",
-        "checkstyle.javadoc.type.scope": "private"
-    ]
 }
 
 tasks.withType(Checkstyle).configureEach { task ->
