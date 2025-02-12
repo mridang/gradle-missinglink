@@ -50,6 +50,10 @@ tasks.withType(com.github.spotbugs.snom.SpotBugsTask).configureEach { task ->
 // task level.
 checkstyle {
 	config = rootProject.resources.text.fromFile("gradle/config/checkstyle/google_checks.xml")
+	    configProperties = [
+        "checkstyle.javadoc.method.scope": "private",
+        "checkstyle.javadoc.type.scope": "private"
+    ]
 }
 
 tasks.withType(Checkstyle).configureEach { task ->

@@ -74,8 +74,7 @@ public class HTMLReport {
               + """
           </table>
       </body>
-      </html>
-      """);
+      </html>""");
     } catch (IOException e) {
       throw new RuntimeException("Failed to write HTML report", e);
     }

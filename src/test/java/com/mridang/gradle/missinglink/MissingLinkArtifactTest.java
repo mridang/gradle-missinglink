@@ -69,6 +69,7 @@ class MissingLinkArtifactTest {
       return "jar";
     }
 
+    @SuppressWarnings("NullAway")
     @Override
     public String getClassifier() {
       return null;
