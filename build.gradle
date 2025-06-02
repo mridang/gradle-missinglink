@@ -133,7 +133,7 @@ spotless {
 
 dependencies {
 	checkstyle group: 'com.puppycrawl.tools', name: 'checkstyle', version: '10.23.1'
-    errorprone group: 'com.uber.nullaway', name: 'nullaway', version: '0.12.2'
+    errorprone group: 'com.uber.nullaway', name: 'nullaway', version: '0.12.7'
 	errorprone group: 'com.google.errorprone', name: 'error_prone_core', version: '2.36.0'
 	spotbugsPlugins group: 'com.h3xstream.findsecbugs', name: 'findsecbugs-plugin', version: '1.13.0'
     spotbugs group: 'com.github.spotbugs', name: 'spotbugs', version: '4.8.6'
