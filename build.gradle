@@ -138,7 +138,7 @@ dependencies {
 	spotbugsPlugins group: 'com.h3xstream.findsecbugs', name: 'findsecbugs-plugin', version: '1.13.0'
     spotbugs group: 'com.github.spotbugs', name: 'spotbugs', version: '4.8.6'
 	jacocoAgent group: 'org.jacoco', name: 'org.jacoco.agent', version: '0.8.12'
-	jacocoAnt group: 'org.jacoco', name: 'org.jacoco.ant', version: '0.8.12'
+	jacocoAnt group: 'org.jacoco', name: 'org.jacoco.ant', version: '0.8.13'
     implementation gradleApi()
     implementation group: 'com.google.code.findbugs', name: 'annotations', version: '3.0.1u2'
     implementation group: 'com.spotify', name: 'missinglink-core', version: '0.2.11'
