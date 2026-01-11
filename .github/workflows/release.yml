@@ -29,6 +29,8 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+            gradle-version: '8.12'
 
       - name: Run semantic-release
         uses: mridang/action-semantic-release@v2
