@@ -91,9 +91,11 @@ jacocoTestReport {
 	reports {
 		csv {
 			required = true
+			destination = file("$buildDir/reports/jacoco/test/jacoco.csv")
 		}
 		xml {
 			required = true
+			destination = file("$buildDir/reports/jacoco/test/jacoco.xml")
 		}
 		html {
 			required = true
@@ -109,6 +111,7 @@ test {
 	reports {
 		junitXml {
 			required = true
+			destination = file("$buildDir/reports/tests/test")
 		}
 		html {
 			required = true

@@ -1,4 +1,4 @@
-name: Run Tests (Jest)
+name: Run Tests
 
 on: push
 
@@ -42,3 +42,9 @@ jobs:
 
       - name: Run Junit
         run: gradle test --no-daemon
+
+      - name: Upload Reports
+        uses: mridang/action-test-reporter@v3
+        with:
+          results-path: build/reports/tests/test/*.xml
+          coverage-path: build/reports/jacoco/test/jacoco.xml
